@@ -237,7 +237,7 @@ export function PipStage({
       el.className = kind === "spark" ? "pa-spark" : "pa-confetti";
       el.style.left = `${x}px`;
       el.style.top = `${y}px`;
-      if (kind === "confetti") el.dataset.c = String(Math.floor(rand(i, 9) * 4));
+      if (kind === "confetti") el.dataset["c"] = String(Math.floor(rand(i, 9) * 4));
       fx.appendChild(el);
       const ang = (i / n) * Math.PI * 2 + rand(i, 7) * 0.6;
       const dist = (kind === "spark" ? 50 : 90) + rand(i, 8) * (kind === "spark" ? 70 : 120);
@@ -278,7 +278,7 @@ export function PipStage({
   const flash = (kind: "gold" | "red", duration: number) => {
     const el = flashRef.current;
     if (!el) return;
-    el.dataset.kind = kind;
+    el.dataset["kind"] = kind;
     el.animate([{ opacity: 0 }, { opacity: kind === "gold" ? 0.55 : 0.42, offset: 0.25 }, { opacity: 0 }], { duration, easing: "ease-out" });
   };
   const shake = () => {
@@ -504,7 +504,7 @@ export function PipStage({
       const d = depthScale(p.y);
       if (pipRef.current) pipRef.current.style.transform = `translate3d(${p.x}px, ${p.y}px, 0)`;
       if (bodyRef.current) {
-        if (bodyRef.current.dataset.pose !== s.pose) bodyRef.current.dataset.pose = s.pose;
+        if (bodyRef.current.dataset["pose"] !== s.pose) bodyRef.current.dataset["pose"] = s.pose;
         bodyRef.current.style.transform =
           `translate3d(0, ${-s.lift}px, 0) rotate(${s.rot}deg) scale(${s.sx * d * s.flip}, ${s.sy * d})`;
       }
